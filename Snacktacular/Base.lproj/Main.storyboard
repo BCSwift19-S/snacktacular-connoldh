@@ -354,6 +354,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="9VC-1d-0av"/>
                         <barButtonItem title="Look Up Place" id="9SO-q3-P69">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="lookUpPlacePressed:" destination="L7d-5i-Cie" id="uGY-uY-HtE"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="R1z-zr-Kjm">
