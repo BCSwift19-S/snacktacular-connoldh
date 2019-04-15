@@ -417,6 +417,7 @@
                         <outlet property="nameLabel" destination="xAW-z0-vrn" id="XId-XW-63R"/>
                         <outlet property="postedByLabel" destination="SUo-b4-8VU" id="Ikb-vk-2MX"/>
                         <outlet property="reviewDateLabel" destination="D9Y-1K-VsQ" id="z5G-nu-WCe"/>
+                        <outlet property="reviewTitle" destination="ElE-IT-5Zy" id="c0t-oE-5g7"/>
                         <outlet property="reviewView" destination="03O-hk-rjc" id="dGi-wq-WZh"/>
                         <outlet property="saveBarButton" destination="EMn-Qi-kn4" id="AzH-i1-2bN"/>
                         <outletCollection property="starButtonCollection" destination="xl5-TI-NAQ" collectionClass="NSMutableArray" id="07T-WK-Go2"/>
