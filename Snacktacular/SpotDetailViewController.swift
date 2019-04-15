@@ -23,6 +23,7 @@ class SpotDetailViewController: UIViewController {
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     
     var spot: Spot!
+    var photos: Photos!
     var regionDistance: CLLocationDistance = 750
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
@@ -40,6 +41,8 @@ class SpotDetailViewController: UIViewController {
 //        mapView.delegate = self as! MKMapViewDelegate
         tableView.delegate = self
         tableView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         if spot == nil {
             spot = Spot()
@@ -56,6 +59,8 @@ class SpotDetailViewController: UIViewController {
             navigationController?.setToolbarHidden(true, animated: true)
         }
         reviews = Reviews()
+        photos = Photos()
+        
         let region = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
         mapView.setRegion(region, animated: true)
         updateUserInterface()
@@ -108,6 +113,7 @@ class SpotDetailViewController: UIViewController {
         mapView.addAnnotation(spot)
         mapView.setCenter(spot.coordinate, animated: true)
     }
+    
     func leaveViewController() {
         let isPresentingInAddMode = presentingViewController is UINavigationController
         if isPresentingInAddMode {
@@ -115,6 +121,17 @@ class SpotDetailViewController: UIViewController {
         } else {
             navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func cameraOrLibraryAlert() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: nil)
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 
     
@@ -131,6 +148,7 @@ class SpotDetailViewController: UIViewController {
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
+        cameraOrLibraryAlert()
     }
     
     @IBAction func reviewButtonPressed(_ sender: UIButton) {
@@ -257,6 +275,19 @@ extension SpotDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! SpotReviewsTableViewCell
         cell.review = reviews.reviewArray[indexPath.row]
+        return cell
+    }
+    
+}
+
+extension SpotDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.photoArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! SpotPhotosCollectionViewCell
+        cell.photo = photos.photoArray[indexPath.row]
         return cell
     }
     
