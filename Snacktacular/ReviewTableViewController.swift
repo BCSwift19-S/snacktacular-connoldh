@@ -16,10 +16,10 @@ class ReviewTableViewController: UITableViewController {
     @IBOutlet weak var reviewTitle: UILabel!
     @IBOutlet weak var reviewView: UITextView!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    @IBOutlet weak var reviewDateLabel: UILabel!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var buttonsBackgroundView: UIView!
-    @IBOutlet weak var reviewDateLabel: UILabel!
     @IBOutlet var starButtonCollection: [UIButton]!
     
     var spot: Spot!
