@@ -41,9 +41,19 @@ class Photo {
             return completed(false)
         }
         
+        let uploadMetadata = StorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        
+        
         documentUUID = UUID().uuidString // generate unique ID to use for photo image's name
         let storageRef = storage.reference().child(spot.documentID).child(self.documentUUID)
-        let uploadTask = storageRef.putData(photoData)
+        let uploadTask = storageRef.putData(photoData, metadata: uploadMetadata){metadata, error in
+            guard error == nil else {
+                print("error during put data storage upload for reference \(storageRef). Error: \(error!.localizedDescription)")
+                return
+            }
+            print("upload worked, metadata is \(metadata)")
+        }
         
         uploadTask.observe(.success) {(snapshot) in
             let dataToSave = self.dictionary
