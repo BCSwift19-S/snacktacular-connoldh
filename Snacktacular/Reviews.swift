@@ -18,9 +18,7 @@ class Reviews {
     }
     
     func loadData(spot: Spot, completed: @escaping () -> ()) {
-        guard spot.documentID != "" else {
-            return
-        }
+        
         db.collection("spots").document(spot.documentID).collection("reviews").addSnapshotListener { (querySnapshot, error) in
             guard error == nil else {
                 print("*** error: adding the snapshot listener \(error!.localizedDescription)")
