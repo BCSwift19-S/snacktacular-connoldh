@@ -24,6 +24,7 @@ class ReviewTableViewController: UITableViewController {
     
     var spot: Spot!
     var review: Review!
+    let dateFormatter = DateFormatter()
     
     var rating = 0 {
         didSet {
@@ -53,6 +54,7 @@ class ReviewTableViewController: UITableViewController {
         }
 
     }
+    
     
     func leaveViewController() {
         let isPresentingInAddMode = presentingViewController is UINavigationController
